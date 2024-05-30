@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cksniuqeg4vib"]
+[gd_scene load_steps=3 format=3 uid="uid://cksniuqeg4vib"]
+
+[ext_resource type="Script" path="res://scripts/level_boundary.gd" id="1_hllgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w1h3e"]
 size = Vector2(1280, 720)
@@ -6,7 +8,10 @@ size = Vector2(1280, 720)
 [node name="level_boundary" type="Area2D"]
 collision_layer = 8
 collision_mask = 7
+script = ExtResource("1_hllgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(640, 360)
+position = Vector2(640, 357)
 shape = SubResource("RectangleShape2D_w1h3e")
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

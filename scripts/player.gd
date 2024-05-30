@@ -7,6 +7,8 @@ extends RigidBody2D
 
 func _physics_process(delta: float) -> void:
 	_handle_player_input(delta)
+	
+	print(linear_velocity)
 
 func _handle_player_input(delta: float) -> void:
 	if (Input.is_action_pressed("player_move_up")):
@@ -16,8 +18,4 @@ func _handle_player_input(delta: float) -> void:
 	if (Input.is_action_pressed("player_move_right")):
 		apply_torque(torque_force)
 	
-
-
-func _on_level_boundary_body_exited(body: Node2D) -> void:
-	linear_velocity = -linear_velocity
 

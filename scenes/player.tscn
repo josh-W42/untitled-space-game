@@ -1,11 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://ca6bvm2vdwuc6"]
+[gd_scene load_steps=10 format=3 uid="uid://ca6bvm2vdwuc6"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rw0te"]
 [ext_resource type="Texture2D" uid="uid://c612ndvdnmb24" path="res://assets/ships/player/playerShip2_blue.png" id="1_rwbsq"]
 [ext_resource type="Texture2D" uid="uid://0i62v4u74buq" path="res://assets/effects/shield3.png" id="2_hk3kh"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sm6el"]
-friction = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dutwj"]
 radius = 41.0
@@ -95,11 +92,7 @@ _data = {
 "Shields_Up": SubResource("Animation_smrsj")
 }
 
-[node name="Player" type="RigidBody2D"]
-collision_mask = 10
-physics_material_override = SubResource("PhysicsMaterial_sm6el")
-gravity_scale = 0.0
-freeze_mode = 1
+[node name="RigidBody2D" type="RigidBody2D"]
 script = ExtResource("1_rw0te")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

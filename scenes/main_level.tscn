@@ -21,5 +21,3 @@ texture = ExtResource("3_nkitq")
 anchor_mode = 0
 
 [node name="level_boundary" parent="." instance=ExtResource("4_j774s")]
-
-[connection signal="body_exited" from="level_boundary" to="Player" method="_on_level_boundary_body_exited"]
