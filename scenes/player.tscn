@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://ca6bvm2vdwuc6"]
+[gd_scene load_steps=11 format=3 uid="uid://ca6bvm2vdwuc6"]
 
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_rw0te"]
 [ext_resource type="Texture2D" uid="uid://c612ndvdnmb24" path="res://assets/ships/player/playerShip2_blue.png" id="1_rwbsq"]
 [ext_resource type="Texture2D" uid="uid://0i62v4u74buq" path="res://assets/effects/shield3.png" id="2_hk3kh"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sm6el"]
+friction = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dutwj"]
 radius = 41.0
@@ -10,65 +14,107 @@ height = 82.0
 [sub_resource type="Animation" id="Animation_smrsj"]
 resource_name = "Shields_Up"
 length = 2.0
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:process_material:color")
-tracks/0/interp = 1
+tracks/0/path = NodePath("../EffectSprite:scale")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.176778, 4.43829),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(0.5, 0.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../EffectSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_li3fy"]
 length = 0.001
+
+[sub_resource type="Animation" id="Animation_pieaf"]
+resource_name = "Shield_On"
+length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:process_material:color")
+tracks/0/path = NodePath("../EffectSprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kftra"]
+resource_name = "Shield_down"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../EffectSprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(4.43829, 0.176778),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../EffectSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mpu46"]
 _data = {
 "RESET": SubResource("Animation_li3fy"),
+"Shield_On": SubResource("Animation_pieaf"),
+"Shield_down": SubResource("Animation_kftra"),
 "Shields_Up": SubResource("Animation_smrsj")
 }
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wtb2g"]
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-
-[node name="Player" type="CharacterBody2D"]
-motion_mode = 1
+[node name="Player" type="RigidBody2D"]
+collision_mask = 10
+physics_material_override = SubResource("PhysicsMaterial_sm6el")
+gravity_scale = 0.0
+freeze_mode = 1
+script = ExtResource("1_rw0te")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_dutwj")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_rwbsq")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_mpu46")
 }
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 1
-process_material = SubResource("ParticleProcessMaterial_wtb2g")
+[node name="EffectSprite" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_hk3kh")
-lifetime = 2.0
-collision_base_size = 2.0
+
+[node name="Player2" type="Sprite2D" parent="."]
+texture = ExtResource("1_rwbsq")

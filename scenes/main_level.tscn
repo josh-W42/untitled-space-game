@@ -1,7 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://crs054pnh28jw"]
+[gd_scene load_steps=5 format=3 uid="uid://crs054pnh28jw"]
 
+[ext_resource type="PackedScene" uid="uid://b47usjlirq3in" path="res://scenes/background.tscn" id="1_7eo4f"]
 [ext_resource type="PackedScene" uid="uid://ca6bvm2vdwuc6" path="res://scenes/player.tscn" id="1_8qytd"]
+[ext_resource type="Texture2D" uid="uid://cbkcgsbwqs46p" path="res://assets/ships/enemies/enemyBlack1.png" id="3_nkitq"]
+[ext_resource type="PackedScene" uid="uid://cksniuqeg4vib" path="res://scenes/level_boundary.tscn" id="4_j774s"]
 
 [node name="Main_Level" type="Node2D"]
 
+[node name="Background" parent="." instance=ExtResource("1_7eo4f")]
+layer = -128
+
 [node name="Player" parent="." instance=ExtResource("1_8qytd")]
+position = Vector2(624, 338)
+
+[node name="EnemyBlack1" type="Sprite2D" parent="."]
+position = Vector2(407, 160)
+texture = ExtResource("3_nkitq")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="level_boundary" parent="." instance=ExtResource("4_j774s")]
+
+[connection signal="body_exited" from="level_boundary" to="Player" method="_on_level_boundary_body_exited"]
