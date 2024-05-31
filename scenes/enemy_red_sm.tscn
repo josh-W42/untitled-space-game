@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://tr7b5fk0lbin"]
+
+[ext_resource type="Script" path="res://scripts/enemy_red_sm.gd" id="1_0plg4"]
+[ext_resource type="Texture2D" uid="uid://njbiu5ph0duq" path="res://assets/ships/enemies/enemyRed2.png" id="1_iki2d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_77oia"]
+radius = 43.0
+
+[node name="EnemyRedSm" type="CharacterBody2D" groups=["Tracking_Enemies"]]
+disable_mode = 2
+motion_mode = 1
+script = ExtResource("1_0plg4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_77oia")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("1_iki2d")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

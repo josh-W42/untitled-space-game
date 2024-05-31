@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://0i62v4u74buq" path="res://assets/effects/shield3.png" id="2_hk3kh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dutwj"]
-radius = 41.0
+radius = 22.0
 height = 82.0
 
 [sub_resource type="Animation" id="Animation_smrsj"]
@@ -92,7 +92,7 @@ _data = {
 "Shields_Up": SubResource("Animation_smrsj")
 }
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D"]
 script = ExtResource("1_rw0te")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

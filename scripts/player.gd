@@ -7,8 +7,7 @@ extends RigidBody2D
 
 func _physics_process(delta: float) -> void:
 	_handle_player_input(delta)
-	
-	print(linear_velocity)
+
 
 func _handle_player_input(delta: float) -> void:
 	if (Input.is_action_pressed("player_move_up")):
