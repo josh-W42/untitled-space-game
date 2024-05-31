@@ -7,6 +7,7 @@
 radius = 43.0
 
 [node name="EnemyRedSm" type="CharacterBody2D" groups=["Tracking_Enemies"]]
+rotation = 0.401426
 disable_mode = 2
 motion_mode = 1
 script = ExtResource("1_0plg4")
