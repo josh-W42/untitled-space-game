@@ -12,7 +12,7 @@ var previous_target = target_position
 	
 func _ready():
 	# If you need to debug the agents
-	# NAgent.debug_enabled = true
+	#NAgent.debug_enabled = true
 	pass
 	
 	

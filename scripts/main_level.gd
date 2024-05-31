@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var enemy_retargeting_delta: int = 1000
+
 @onready var player: Player = $Player
 
 func _ready() -> void:
@@ -8,8 +10,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	#print(player.global_position.distance_squared_to(enemy.target_position))
 	for enemy in get_tree().get_nodes_in_group("Tracking_Enemies"):
-		if player.global_position.distance_squared_to(enemy.target_position) > 1000:
+		if player.global_position.distance_squared_to(enemy.target_position) > enemy_retargeting_delta:
 			enemy.target_position = player.global_position
 		

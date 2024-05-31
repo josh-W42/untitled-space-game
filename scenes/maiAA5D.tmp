@@ -19,6 +19,7 @@ anchor_mode = 0
 [node name="level_boundary" parent="." instance=ExtResource("4_j774s")]
 
 [node name="EnemyRedSm2" parent="." instance=ExtResource("3_fp2j7")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("1_8qytd")]
 position = Vector2(624, 338)
