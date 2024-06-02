@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ca6bvm2vdwuc6"]
+[gd_scene load_steps=11 format=3 uid="uid://ca6bvm2vdwuc6"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rw0te"]
 [ext_resource type="Texture2D" uid="uid://c612ndvdnmb24" path="res://assets/ships/player/playerShip2_blue.png" id="1_rwbsq"]
 [ext_resource type="Texture2D" uid="uid://0i62v4u74buq" path="res://assets/effects/shield3.png" id="2_hk3kh"]
+[ext_resource type="AudioStream" uid="uid://cjnndxtnqpw8a" path="res://assets/audio/sfx_projectile_file.ogg" id="4_t3p22"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dutwj"]
 radius = 22.0
@@ -112,3 +113,8 @@ texture = ExtResource("2_hk3kh")
 
 [node name="Player2" type="Sprite2D" parent="."]
 texture = ExtResource("1_rwbsq")
+
+[node name="WeaponContainer" type="Node" parent="."]
+
+[node name="ProjectileFireAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_t3p22")
