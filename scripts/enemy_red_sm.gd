@@ -41,27 +41,28 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: int) -> void:
 	
 	if health >= total_health * 0.75 && health - amount < total_health * 0.75:
-		_hull_collapse(Debris.get_random_sm_debris())
+		_hull_collapse.call_deferred(Debris.get_random_sm_debris())
 	elif health >= total_health * 0.50 && health - amount < total_health * 0.50:
-		_hull_collapse(Debris.get_random_med_debris())
+		_hull_collapse.call_deferred(Debris.get_random_med_debris())
 	elif health >= total_health * 0.25 && health - amount < total_health * 0.25:
-		_hull_collapse(Debris.get_random_lg_debris())
+		_hull_collapse.call_deferred(Debris.get_random_lg_debris())
 		
 	ship_hit_sound.play()
 	health -= amount
 	
 	if health <= 0:
 		ship_destroyed.play()
-		_hull_collapse(Debris.get_random_lg_debris(), false)
-		_hull_collapse(Debris.get_random_med_debris(), false)
-		_hull_collapse(Debris.get_random_lg_debris(), false)
-		get_tree().create_timer(1).timeout.connect(func (): queue_free())
+		_hull_collapse.call_deferred(Debris.get_random_lg_debris(), false)
+		_hull_collapse.call_deferred(Debris.get_random_med_debris(), false)
+		_hull_collapse.call_deferred(Debris.get_random_lg_debris(), false)
+		queue_free()
 	
-func _hull_collapse(debris_type: String, play_sfx: bool = true, ) -> void:
+func _hull_collapse(debris_type: String, play_sfx: bool = true) -> void:
 	if play_sfx:
 		ship_hull_damaged.play()
 		
 	var new_velocity := Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	var new_position := Vector2(global_position.x + sin(rotation) * 50, global_position.y + -cos(rotation) * 50)
 	var debris_instance: Debris = Debris.create_debris(debris_type, new_position, new_velocity)
-	self.get_parent().add_child(debris_instance)
+	get_parent().add_child(debris_instance)
+
