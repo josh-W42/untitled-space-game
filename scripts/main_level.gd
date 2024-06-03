@@ -1,16 +1,11 @@
 extends Node2D
 
-@export var enemy_retargeting_delta: int = 1000
+@export var enemy_count = 5
 
-@onready var player: Player = $Player
+@onready var world = $World
 
 func _ready() -> void:
-	for enemy in get_tree().get_nodes_in_group("Enemy"):
-		enemy.target_position = player.global_position
-
-
-func _process(delta: float) -> void:
-	for enemy in get_tree().get_nodes_in_group("Enemy"):
-		if player.global_position.distance_squared_to(enemy.target_position) > enemy_retargeting_delta:
-			enemy.target_position = player.global_position
-		
+	world.spawn_player()
+	
+	for i in range(enemy_count):
+		world.spawn_enemy()

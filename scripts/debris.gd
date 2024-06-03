@@ -27,13 +27,3 @@ static func get_random_med_debris() -> String:
 
 static func get_random_lg_debris() -> String:
 	return [Constants.DEBRIS_LG_1, Constants.DEBRIS_LG_2, Constants.DEBRIS_LG_3].pick_random()
-
-static func create_debris(texture_path: String, postion: Vector2, velocity: Vector2) -> Debris:
-	var debris_scene = load("res://scenes/debris.tscn")
-	var texture: Texture2D = load(texture_path)
-	var debris_instance: Debris = debris_scene.instantiate()
-	debris_instance.set_texture(texture)
-	debris_instance.global_position = postion
-	debris_instance.linear_velocity = velocity
-	return debris_instance
-	

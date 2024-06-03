@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://crs054pnh28jw"]
+[gd_scene load_steps=6 format=3 uid="uid://crs054pnh28jw"]
 
 [ext_resource type="PackedScene" uid="uid://b47usjlirq3in" path="res://scenes/background.tscn" id="1_7eo4f"]
-[ext_resource type="PackedScene" uid="uid://ca6bvm2vdwuc6" path="res://scenes/player.tscn" id="1_8qytd"]
 [ext_resource type="Script" path="res://scripts/main_level.gd" id="1_m4ors"]
-[ext_resource type="PackedScene" uid="uid://tr7b5fk0lbin" path="res://scenes/enemy_red_sm.tscn" id="3_fp2j7"]
 [ext_resource type="PackedScene" uid="uid://cksniuqeg4vib" path="res://scenes/level_boundary.tscn" id="4_j774s"]
+[ext_resource type="PackedScene" uid="uid://k8swrqsbt50s" path="res://scenes/world.tscn" id="5_fftud"]
 [ext_resource type="PackedScene" uid="uid://cmyqkqscxogvn" path="res://scenes/navagator_region.tscn" id="5_qmk3k"]
 
 [node name="MainLevel" type="Node2D"]
@@ -18,12 +17,6 @@ anchor_mode = 0
 
 [node name="level_boundary" parent="." instance=ExtResource("4_j774s")]
 
-[node name="EnemyRedSm2" parent="." instance=ExtResource("3_fp2j7")]
-target_position = Vector2(0, 0)
-speed = 50
-health = 200
-
-[node name="Player" parent="." instance=ExtResource("1_8qytd")]
-position = Vector2(624, 338)
-
 [node name="NavagatorRegion" parent="." instance=ExtResource("5_qmk3k")]
+
+[node name="World" parent="." instance=ExtResource("5_fftud")]

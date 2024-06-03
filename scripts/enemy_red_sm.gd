@@ -2,6 +2,8 @@ class_name Enemy
 
 extends CharacterBody2D
 
+signal spawn_debris(texture_path: String, postion: Vector2, velocity: Vector2)
+
 @export var target_position: Vector2 = Vector2(0, 0)
 @export var speed: int = 50
 @export var health: int = 200
@@ -46,7 +48,7 @@ func take_damage(amount: int) -> void:
 		_hull_collapse.call_deferred(Debris.get_random_med_debris())
 	elif health >= total_health * 0.25 && health - amount < total_health * 0.25:
 		_hull_collapse.call_deferred(Debris.get_random_lg_debris())
-		
+
 	ship_hit_sound.play()
 	health -= amount
 	
@@ -63,6 +65,5 @@ func _hull_collapse(debris_type: String, play_sfx: bool = true) -> void:
 		
 	var new_velocity := Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	var new_position := Vector2(global_position.x + sin(rotation) * 50, global_position.y + -cos(rotation) * 50)
-	var debris_instance: Debris = Debris.create_debris(debris_type, new_position, new_velocity)
-	get_parent().add_child(debris_instance)
+	emit_signal("spawn_debris", debris_type, new_position, new_velocity)
 
