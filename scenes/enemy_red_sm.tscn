@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://tr7b5fk0lbin"]
+[gd_scene load_steps=6 format=3 uid="uid://tr7b5fk0lbin"]
 
 [ext_resource type="Script" path="res://scripts/enemy_red_sm.gd" id="1_0plg4"]
 [ext_resource type="Texture2D" uid="uid://njbiu5ph0duq" path="res://assets/ships/enemies/enemyRed2.png" id="1_iki2d"]
+[ext_resource type="AudioStream" uid="uid://bgxslsqbo56i1" path="res://assets/audio/sfx_ship_hull_hit.ogg" id="3_wj8lk"]
+[ext_resource type="AudioStream" uid="uid://bfc0koryemrn8" path="res://assets/audio/sfx_ship_hull_damage_severe.ogg" id="4_xr5y6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_77oia"]
 radius = 43.0
 
-[node name="EnemyRedSm" type="CharacterBody2D" groups=["Tracking_Enemies"]]
+[node name="EnemyRedSm" type="CharacterBody2D" groups=["Enemy", "Tracking_Enemies"]]
 rotation = 0.401426
 disable_mode = 2
+collision_layer = 4
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_0plg4")
 
@@ -16,8 +20,20 @@ script = ExtResource("1_0plg4")
 position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_77oia")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ShipSprite" type="Sprite2D" parent="."]
 rotation = -1.5708
 texture = ExtResource("1_iki2d")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="ShipHitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wj8lk")
+volume_db = -15.0
+pitch_scale = 3.0
+
+[node name="HullDownQuarter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xr5y6")
+volume_db = -10.07
+pitch_scale = 3.2
+
+[node name="EffectContainer" type="Node" parent="."]
