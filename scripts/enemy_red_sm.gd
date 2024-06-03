@@ -10,7 +10,7 @@ var total_health = health
 @onready var NAgent = $NavigationAgent2D
 @onready var ship_hit_sound = $ShipHitSound
 @onready var ship_hull_damaged = $HullDownQuarter
-@onready var effect_container = $EffectContainer
+@onready var ship_destroyed = $ShipDestroyed
 
 var previous_target = target_position
 	
@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	#print("Is Navigation Complete?: ", NAgent.is_navigation_finished())
 	
 func take_damage(amount: int) -> void:
-	print(health)
+	
 	if health >= total_health * 0.75 && health - amount < total_health * 0.75:
 		_hull_collapse(Debris.get_random_sm_debris())
 	elif health >= total_health * 0.50 && health - amount < total_health * 0.50:
@@ -49,9 +49,19 @@ func take_damage(amount: int) -> void:
 		
 	ship_hit_sound.play()
 	health -= amount
-		
 	
-func _hull_collapse(debris_type: String) -> void:
-	ship_hull_damaged.play()
-	var debris_instance: Debris = Debris.create_debris(debris_type, Vector2(global_position.x + sin(rotation) * 50, global_position.y + -cos(rotation) * 50), rotation) 
-	effect_container.add_child(debris_instance)
+	if health <= 0:
+		ship_destroyed.play()
+		_hull_collapse(Debris.get_random_lg_debris(), false)
+		_hull_collapse(Debris.get_random_med_debris(), false)
+		_hull_collapse(Debris.get_random_lg_debris(), false)
+		get_tree().create_timer(1).timeout.connect(func (): queue_free())
+	
+func _hull_collapse(debris_type: String, play_sfx: bool = true, ) -> void:
+	if play_sfx:
+		ship_hull_damaged.play()
+		
+	var new_velocity := Vector2(randf_range(-100, 100), randf_range(-100, 100))
+	var new_position := Vector2(global_position.x + sin(rotation) * 50, global_position.y + -cos(rotation) * 50)
+	var debris_instance: Debris = Debris.create_debris(debris_type, new_position, new_velocity)
+	self.get_parent().add_child(debris_instance)
