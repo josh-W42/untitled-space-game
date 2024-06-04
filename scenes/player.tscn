@@ -114,7 +114,5 @@ texture = ExtResource("2_hk3kh")
 [node name="Player2" type="Sprite2D" parent="."]
 texture = ExtResource("1_rwbsq")
 
-[node name="WeaponContainer" type="Node" parent="."]
-
 [node name="ProjectileFireAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_t3p22")

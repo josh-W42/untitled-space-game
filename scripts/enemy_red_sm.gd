@@ -14,7 +14,10 @@ var total_health = health
 @onready var ship_hull_damaged = $HullDownQuarter
 @onready var ship_destroyed = $ShipDestroyed
 
+var projectile_scene = preload("res://scenes/projectile.tscn")
+
 var previous_target = target_position
+var targeting_vector: Vector2
 	
 func _ready():
 	# If you need to debug the agents
@@ -28,10 +31,10 @@ func _physics_process(delta: float) -> void:
 		previous_target = target_position
 		
 	var next_position: Vector2 = NAgent.get_next_path_position()
+	look_at(next_position)
 	
-	look_at(target_position)
-	var normal_vector_toward_target = global_position.direction_to(next_position)
-	apply_force(normal_vector_toward_target * speed)
+	targeting_vector = global_position.direction_to(next_position)
+	apply_force(targeting_vector * speed)
 	
 	# Agent Debuging
 	#print("Distance to target: ", NAgent.distance_to_target())
@@ -65,4 +68,16 @@ func _hull_collapse(debris_type: String, play_sfx: bool = true) -> void:
 	var new_velocity := Vector2(randf_range(-100, 100), randf_range(-100, 100))
 	var new_position := Vector2(global_position.x + sin(rotation) * 50, global_position.y + -cos(rotation) * 50)
 	emit_signal("spawn_debris", debris_type, new_position, new_velocity)
+	
+func _fire_projectile() -> void:
+	var instance: Projectile = projectile_scene.instantiate()
+	instance.global_position = Vector2(global_position.x + sin(rotation) * 10, global_position.y + -cos(rotation) * 10)
+	instance.rotation = rotation + Constants.NINETY_DEGREES_IN_RADIANS
+	instance.set_collision_masks([Constants.COLLISION_ID_PLAYER])
+	
+	get_parent().add_child(instance)
 
+
+
+func _on_fire_weapon_timer_timeout() -> void:
+	call_deferred("_fire_projectile")

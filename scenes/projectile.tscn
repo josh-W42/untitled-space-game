@@ -70,7 +70,7 @@ _data = {
 
 [node name="Projectile" type="Area2D"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 0
 script = ExtResource("1_yo8cf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
