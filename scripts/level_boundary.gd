@@ -3,7 +3,7 @@ extends Area2D
 
 func _on_body_exited(body: Node2D) -> void:
 	
-	if body is RigidBody2D || body is CharacterBody2D:
+	if body is RigidBody2D:
 		if body.global_position.x < 0:
 			body.global_position.x = get_window().size.x
 		if body.global_position.x > get_window().size.x:

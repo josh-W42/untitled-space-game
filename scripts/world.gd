@@ -10,15 +10,16 @@ var player: Player
 
 @onready var player_spawn = $PlayerSpawn
 
-
 func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-	if player:
-		for enemy in get_tree().get_nodes_in_group("Enemy"):
-			if player.global_position.distance_squared_to(enemy.target_position) > enemy_retargeting_delta:
-				enemy.target_position = player.global_position
+	if player == null:
+		return
+		
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		if player.global_position.distance_squared_to(enemy.target_position) > enemy_retargeting_delta:
+			enemy.target_position = player.global_position
 		
 
 func spawn_enemy():

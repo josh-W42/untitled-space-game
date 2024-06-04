@@ -1,6 +1,6 @@
 class_name Enemy
 
-extends CharacterBody2D
+extends RigidBody2D
 
 signal spawn_debris(texture_path: String, postion: Vector2, velocity: Vector2)
 
@@ -31,9 +31,8 @@ func _physics_process(delta: float) -> void:
 	
 	look_at(target_position)
 	var normal_vector_toward_target = global_position.direction_to(next_position)
-	velocity = normal_vector_toward_target * speed
+	apply_force(normal_vector_toward_target * speed)
 	
-	move_and_slide()
 	# Agent Debuging
 	#print("Distance to target: ", NAgent.distance_to_target())
 	#print("Has Target Been Reached: ", NAgent.is_target_reached())
