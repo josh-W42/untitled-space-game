@@ -13,7 +13,7 @@ var player: Player
 func _ready() -> void:
 	pass
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if player == null:
 		return
 		
@@ -24,8 +24,8 @@ func _process(delta: float) -> void:
 
 func spawn_enemy():
 	var enemy_instance = enemy_scene.instantiate()
-	var position = Vector2(randf_range(10, get_window().size.x), randf_range(10, get_window().size.y))
-	enemy_instance.global_position = position
+	var enemy_position = Vector2(randf_range(10, get_window().size.x), randf_range(10, get_window().size.y))
+	enemy_instance.global_position = enemy_position
 	enemy_instance.connect("spawn_debris", _on_enemy_spawn_debris)
 	add_child(enemy_instance)
 

@@ -16,7 +16,7 @@ func set_collision_masks(ids: Array[int]) -> void:
 func _draw() -> void:
 	animation_player.play("Fire_Projectile")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	global_position += Vector2(sin(rotation) * speed, cos(rotation) * -speed)
 
 func _on_body_entered(body: Node2D) -> void:

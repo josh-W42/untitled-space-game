@@ -6,12 +6,11 @@ extends RigidBody2D
 @export var torque = 10000
 @export var health = 100
 
-@onready var weapon_container = $WeaponContainer
 @onready var projectile_fire_sound = $ProjectileFireAudio
 
 var projectile_scene = preload("res://scenes/projectile.tscn")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_handle_player_input()
 
 
