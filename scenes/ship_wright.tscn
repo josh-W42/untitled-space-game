@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://8b1vjmv2nq7j"]
+
+[ext_resource type="PackedScene" uid="uid://c0sbvu3bfan4d" path="res://scenes/parts_list.tscn" id="1_qdo5m"]
+
+[node name="ShipWright" type="Node"]
+
+[node name="swUI" type="CanvasLayer" parent="."]
+
+[node name="PartsList" parent="swUI" instance=ExtResource("1_qdo5m")]
