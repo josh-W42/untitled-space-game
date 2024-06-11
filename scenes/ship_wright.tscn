@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://8b1vjmv2nq7j"]
+[gd_scene load_steps=3 format=3 uid="uid://8b1vjmv2nq7j"]
 
 [ext_resource type="PackedScene" uid="uid://c0sbvu3bfan4d" path="res://scenes/parts_list.tscn" id="1_qdo5m"]
+[ext_resource type="PackedScene" uid="uid://d0kbmv8wjj1a1" path="res://scenes/workspace.tscn" id="2_6p673"]
 
 [node name="ShipWright" type="Node"]
 
 [node name="swUI" type="CanvasLayer" parent="."]
 
 [node name="PartsList" parent="swUI" instance=ExtResource("1_qdo5m")]
+
+[node name="Workspace" parent="swUI" instance=ExtResource("2_6p673")]

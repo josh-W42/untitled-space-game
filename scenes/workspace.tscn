@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0kbmv8wjj1a1"]
+
+[ext_resource type="Script" path="res://scripts/workspace.gd" id="1_7ukvq"]
+
+[node name="Workspace" type="Control"]
+layout_mode = 3
+anchor_left = 0.39
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.200012
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ukvq")

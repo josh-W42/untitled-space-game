@@ -1,21 +1,21 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0sbvu3bfan4d"]
 
-[ext_resource type="Script" path="res://scenes/parts_list.gd" id="1_4nfdn"]
+[ext_resource type="Script" path="res://scripts/parts_list.gd" id="1_04ane"]
 
 [node name="PartsList" type="Control"]
 clip_contents = true
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchor_right = 0.393
 anchor_bottom = 1.0
+offset_right = -0.0400085
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4nfdn")
+script = ExtResource("1_04ane")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 clip_contents = false
 layout_mode = 0
-offset_right = 449.0
+offset_right = 500.0
 offset_bottom = 722.0
 horizontal_scroll_mode = 3
 

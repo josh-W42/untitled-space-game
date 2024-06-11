@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp38gs03xklev"]
+
+[ext_resource type="Script" path="res://scripts/part_button.gd" id="1_6gevv"]
+
+[node name="PartButton" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_6gevv")
